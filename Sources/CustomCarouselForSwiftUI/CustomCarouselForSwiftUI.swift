@@ -12,17 +12,19 @@ public struct CustomCarouselForSwiftUI: View {
     var autoScrollInterval: TimeInterval
     let leftButton: Image?
     let rightButton: Image?
-    
+    let height: CGFloat?
     @Binding var banners:[AnyView]
     
     public init(autoScrollInterval: TimeInterval = 3.0,
                 leftButton: Image? = nil,
                 rightButton: Image? = nil,
+                height: CGFloat = 190,
                 banners: Binding<[AnyView]>) {
         
         self.autoScrollInterval = autoScrollInterval
         self.leftButton = leftButton
         self.rightButton = rightButton
+        self.height = height
         self._banners = banners
     }
     
@@ -79,6 +81,7 @@ public struct CustomCarouselForSwiftUI: View {
                 }
             }
         }
+        .frame(height: height)
         .onDisappear {
             timer?.invalidate()
         }
