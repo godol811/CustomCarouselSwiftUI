@@ -15,16 +15,6 @@ public struct CustomCarouselForSwiftUI: View {
     
     @Binding var banners:[AnyView]
     
-    init(leftButton: Image? = nil,
-         rightButton: Image? = nil,
-         autoScrollInterval: TimeInterval = 3.0,
-         banners: Binding<[AnyView]>) {
-        
-        self._banners = banners
-        self.leftButton = leftButton
-        self.rightButton = rightButton
-        self.autoScrollInterval = autoScrollInterval
-    }
     
     public var body: some View {
         GeometryReader { geometry in
