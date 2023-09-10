@@ -9,12 +9,22 @@ public struct CustomCarouselForSwiftUI: View {
     @State private var isPostUpdated = false
     @State private var timer: Timer?
     
-    var autoScrollInterval: TimeInterval = 3.0
-    let leftButton:Image?
-    let rightButton:Image?
+    var autoScrollInterval: TimeInterval
+    let leftButton: Image?
+    let rightButton: Image?
     
     @Binding var banners:[AnyView]
     
+    public init(autoScrollInterval: TimeInterval = 3.0,
+                leftButton: Image? = nil,
+                rightButton: Image? = nil,
+                banners: Binding<[AnyView]>) {
+        
+        self.autoScrollInterval = autoScrollInterval
+        self.leftButton = leftButton
+        self.rightButton = rightButton
+        self._banners = banners
+    }
     
     public var body: some View {
         GeometryReader { geometry in
@@ -43,13 +53,11 @@ public struct CustomCarouselForSwiftUI: View {
                             resetTimer(scrollProxy: scrollProxy)
                         }) {
                             if let image = leftButton {
-                                leftButton
-                                    .foregroundColor(Color.black)
-                                    .padding()
+                                image.foregroundColor(Color.black).padding()
+                            } else {
+                                Color.clear.frame(width: 11, height: 22)
                             }
-                            
                         }
-                        .frame(width: 11, height: 22)
                         
                         Spacer()
                         
@@ -61,12 +69,11 @@ public struct CustomCarouselForSwiftUI: View {
                             resetTimer(scrollProxy: scrollProxy)
                         }) {
                             if let image = rightButton {
-                                rightButton
-                                    .foregroundColor(Color.black)
-                                    .padding()
+                                image.foregroundColor(Color.black).padding()
+                            } else {
+                                Color.clear.frame(width: 11, height: 22)
                             }
                         }
-                        .frame(width: 11, height: 22)
                     }
                     .padding(.horizontal, 30)
                 }
